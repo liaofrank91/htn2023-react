@@ -6,6 +6,8 @@ import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import CameraIcon from '@mui/icons-material/Camera';
 
 function CameraApp() {
+  const apiKey = process.env.API_KEY;
+
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const [photoData, setPhotoData] = useState(null);
@@ -53,7 +55,7 @@ function CameraApp() {
   const sendImageToOCR = async () => {
     if (photoData) {
       try {
-        const apiUrl = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyD2lFq87EADs3BDfHTHXXVIzR8ZN7Mbrhw';
+        const apiUrl = `https://vision.googleapis.com/v1/images:annotate?key=${apiKey}`;
         const base64Image = photoData.split(',')[1]; // Remove the data URI prefix
         const requestData = {
           requests: [

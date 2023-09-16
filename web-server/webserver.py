@@ -27,8 +27,12 @@ def handle_frontend_request():
 
 def perform_openai_api_call(menu, allergies, restrictions, goals):
     prompt = 'Here is an unparsed menu:\n' + menu + ". \n"
-    prompt = prompt + "Given these allergies: " + allergies + " and these restrictions: " + restrictions + ".\n"
-    prompt = prompt + "Here are their goals: " + goals + ".\n"
+    if allergies != '':
+        prompt = prompt + "Given these allergies: " + allergies + ".\n"
+    if restrictions != '':
+        prompt = prompt + "Given these restrictions: " + restrictions + ".\n"
+    if goals != '':
+        prompt = prompt + "Here are their goals: " + goals + ".\n"
     prompt = prompt + "List the 3 best options from the menu with detailed explanations of macros\n"
     prompt = prompt + """
     ONLY use the following format (JSON):

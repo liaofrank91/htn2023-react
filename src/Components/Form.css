@@ -1,0 +1,31 @@
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.container {
+  background-color: #333;
+  padding: 20px;
+  height: 100vh; /* Set the height to 100% of viewport height */
+  width: 100vw;
+  display: flex; /* Use flexbox for centering content vertically */
+  flex-direction: column; /* Align children vertically */
+  justify-content: center; /* Center content vertically */
+}
+
+.question {
+  padding: 10px;
+}

@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.homepage-container {
+  background-color: black;
+}
+
+.video-frame {
+  position: relative;
+}
+
+.take-picture-button {
+  position: absolute;
+  bottom: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  z-index: 1;
+}

@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import CameraBox from './CameraBox';
 
 function HomePage() {
   return (
-    <div>Homepage</div>
+    <div className="homepage-container">
+      <CameraBox />
+    </div>
   )
 }
 

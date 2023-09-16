@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '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')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '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')
 OPENAI_ENDPOINT = 'https://api.openai.com/v1/completions'
 
 @app.route('/frontend-endpoint', methods=['POST'])

@@ -5,8 +5,11 @@ import { IconButton } from '@mui/material';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import CameraIcon from '@mui/icons-material/Camera';
 
-function CameraApp() {
-  const apiKey = process.env.API_KEY;
+
+
+function CameraApp(props) {
+  // const apiKey = process.env.REACT_APP_API_KEY;
+  const apiKey = 'AIzaSyCHtiu-J-OZrctQ0JK5WHZZyFbQCrJf7xA'
 
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -69,12 +72,15 @@ function CameraApp() {
         const response = await axios.post(apiUrl, requestData);
         const ocrText = response.data.responses[0].fullTextAnnotation.text;
         console.log('OCR Text:', ocrText);
+        sendImageToWard(ocrText);
 
         // You can now use the OCR text in your application
       } catch (error) {
         console.error('Error sending image to OCR:', error);
       }
     }
+
+
   };
 
   const sendImageToTesseract = () => {
@@ -91,6 +97,16 @@ function CameraApp() {
       });
     }
   };
+
+  const sendImageToWard = (ocrText) => {
+    const wardObject = {
+      menu: ocrText,
+      allergies: props.preferences.allergies,
+      restrictions: props.preferences.dietary,
+      goals: props.preferences.goals,
+    }
+    console.log(wardObject);
+  }
 
   return (
     <div className="camera-container">

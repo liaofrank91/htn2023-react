@@ -22,33 +22,49 @@ const questions = [
       "Halal",
       "Gluten-Free",
       "Lactose-Intolerant",
+      "None",
     ],
     stepperLabel: "Dietary Restrictions",
+    id: "dietary",
   },
   {
     text: "What are your allergies? (seperate with commas)",
     options: [],
     stepperLabel: "Allergies",
+    id: "allergies",
   }, // No options for text input
   {
     text: "What are your diet goals?",
     options: [],
     stepperLabel: "Goals",
+    id: "goals",
   },
 ];
 
-function FormPage() {
+function FormPage(props) {
+  // props.modifyPreferences
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userResponses, setUserResponses] = useState([]);
+  // const [userResponses, setUserResponses] = useState([]);
   const [response, setResponse] = useState("");
   const [transitionIn, setTransitionIn] = useState(true);
 
   const handleNextQuestion = () => {
+    // if (currentQuestionIndex === questions.length - 1) {
+    //   props.switchToHome();
+    // } else {
+    //   setUserResponses([...userResponses, response]);
+    //   setResponse("");
+    //   setTransitionIn(false); // Start fade-out animation
+    //   setTimeout(() => {
+    //     setTransitionIn(true); // Start fade-in animation
+    //     setCurrentQuestionIndex(currentQuestionIndex + 1);
+    //   }, 300); // The same duration as your CSS transition
+    // }
+
     if (currentQuestionIndex === questions.length - 1) {
-      console.log(userResponses); // Log "Hello" to the console after the last question.
+      props.switchToHome();
     } else {
-      setUserResponses([...userResponses, response]);
-      setResponse("");
       setTransitionIn(false); // Start fade-out animation
       setTimeout(() => {
         setTransitionIn(true); // Start fade-in animation
@@ -61,7 +77,7 @@ function FormPage() {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   const isNextDisabled =
-    currentQuestion.options.length === 0 && response.trim() === "";
+    currentQuestion.options.length === 0 && props.preferences[currentQuestion.id].trim() === "";
 
   // Create an array of steps for the Stepper
   const steps = questions.map((question, index) => (
@@ -86,8 +102,8 @@ function FormPage() {
             <TextField
               select
               fullWidth
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
+              value={props.preferences[currentQuestion.id]}
+              onChange={(e) => props.modifyPreferences(e, currentQuestion.id)}
             >
               <MenuItem value="">Select an option</MenuItem>
               {currentQuestion.options.map((option, index) => (
@@ -99,8 +115,8 @@ function FormPage() {
           ) : (
             <TextField
               fullWidth
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
+              value={props.preferences[currentQuestion.id]}
+              onChange={(e) => props.modifyPreferences(e, currentQuestion.id)}
               placeholder="Type your answer"
             />
           )}

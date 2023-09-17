@@ -28,7 +28,7 @@ const questions = [
     id: "dietary",
   },
   {
-    text: "What are your allergies? (seperate with commas)",
+    text: "What are your allergies?",
     options: [],
     stepperLabel: "Allergies",
     id: "allergies",
@@ -78,7 +78,7 @@ function FormPage(props) {
 
   const isNextDisabled =
     currentQuestion.options.length === 0 &&
-    props.preferences[currentQuestion.id].trim() === "";
+    props.preferences[currentQuestion.id].trim() === "" && currentQuestion.id != "allergies";
 
   // Create an array of steps for the Stepper
   const steps = questions.map((question, index) => (

@@ -18,10 +18,14 @@ function CameraApp(props) {
   useEffect(() => {
     async function startCamera() {
       try {
+        const idealWidth = window.screen.width;
+        const screenHeight = window.screen.height; // Get the screen height
+        const idealHeight = Math.round(screenHeight * 0.75);
+
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            width: { ideal: 600 },
-            height: { ideal: 1300 }
+            width: { ideal: idealWidth },
+            height: { ideal: idealHeight }
           }
         });
         videoRef.current.srcObject = stream;
@@ -31,7 +35,7 @@ function CameraApp(props) {
     }
 
     startCamera();
-  }, []);
+  }, [window.screen.height, window.screen.width]);
 
   const takePhoto = () => {
     if (videoRef.current && canvasRef.current) {
@@ -52,6 +56,8 @@ function CameraApp(props) {
       // Set the captured photo data
       setPhotoData(dataUrl);
       console.log(dataUrl);
+
+      sendImageToOCR();
     }
   };
 
@@ -123,7 +129,11 @@ function CameraApp(props) {
       .then(result => {
         if (result.response && result.response.choices && result.response.choices.length > 0) {
           const options = result.response.choices[0].text;
-          console.log(JSON.parse(options).options);
+          const final_options = JSON.parse(options).options;
+          // console.log(JSON.parse(options).options);
+          // final_options array of length 3, each object in the array has NUMBER, NAME, REASON (also an array of 3)
+          props.setResultObj(final_options);
+          props.switchToResults();
         } else {
           console.log('No options found in the response.');
         }
@@ -134,7 +144,7 @@ function CameraApp(props) {
   return (
     <div className="camera-container">
       <div className="video-frame">
-        <video height="500" ref={videoRef} autoPlay playsInline muted />
+        <video style={{ height: 'auto', width: "auto", borderRadius: "25px" }} ref={videoRef} autoPlay playsInline muted />
         {/* <button onClick={takePhoto} className="take-picture-button">
           Take Photo
         </button> */}
@@ -143,19 +153,15 @@ function CameraApp(props) {
           bottom: '10px',
           left: '10px',
           zIndex: 2,
+          width: '96vw',
         }}>
-          <CameraIcon /> {/* Use the camera or shutter icon here */}
+          <CameraIcon style={{fontSize: '60px', color: "#538c50", opacity: "100%"}}/> {/* Use the camera or shutter icon here */}
         </IconButton>
       </div>
       <canvas ref={canvasRef} style={{ display: 'none' }} />
-      {photoData && (
-        <div className="captured-photo">
-          <img src={photoData} alt="Captured" />
-        </div>
-      )}
-      <button disabled={!photoData} onClick={sendImageToOCR}>
+      {/* <button disabled={!photoData} onClick={sendImageToOCR}>
         Image to OCR
-      </button>
+      </button> */}
     </div>
   );
 }

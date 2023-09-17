@@ -2,17 +2,20 @@ import React from 'react'
 import { useState } from 'react'
 import HomePage from './HomePage'
 import FormPage from './FormPage';
+import Results from './Results';
 
 function AppContainer() {
 
   // overwrite these with user responses, if undefined then treat as no dietary/allergies/goals
   const [preferences, setPreferences] = useState({
     dietary: '',
-    allergies: '', 
+    allergies: '',
     goals: '',
   });
 
-  const modifyPreferences = (e, id) => {    
+  const [resultObj, setResultObj] = useState(undefined);
+
+  const modifyPreferences = (e, id) => {
     setPreferences((prev) => {
       return {
         ...prev,
@@ -37,15 +40,16 @@ function AppContainer() {
   const switchToHome = () => {
     setScreenState('homepage');
   }
+  const switchToResults = () => {
+    setScreenState('results');
+  }
 
   return (
-    <div>
-      {screenState === "homepage" && <HomePage switchToForm={switchToForm} preferences={preferences}/>}
-      {screenState === "form" && <FormPage switchToHome={switchToHome} preferences={preferences} modifyPreferences={modifyPreferences}/>}
-      <div>
-        PREFERENCES - dietary: {preferences.dietary}, allergies: {preferences.allergies}, goals: {preferences.goals}
-      </div>
-    </div>
+    <>
+      {screenState === "homepage" && <HomePage switchToForm={switchToForm} preferences={preferences} setResultObj={setResultObj} />}
+      {screenState === "form" && <FormPage switchToHome={switchToHome} switchToResults={switchToResults} preferences={preferences} modifyPreferences={modifyPreferences} />}
+      {screenState === "results" && <Results resultObj={resultObj} />}
+    </>
   )
 }
 

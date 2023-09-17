@@ -46,7 +46,7 @@ function AppContainer() {
 
   return (
     <>
-      {screenState === "homepage" && <HomePage switchToForm={switchToForm} preferences={preferences} setResultObj={setResultObj} />}
+      {screenState === "homepage" && <HomePage switchToForm={switchToForm} switchToResults={switchToResults} preferences={preferences} setResultObj={setResultObj} />}
       {screenState === "form" && <FormPage switchToHome={switchToHome} switchToResults={switchToResults} preferences={preferences} modifyPreferences={modifyPreferences} />}
       {screenState === "results" && <Results resultObj={resultObj} />}
     </>

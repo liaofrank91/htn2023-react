@@ -42,14 +42,14 @@ def handle_frontend_request():
 def perform_openai_api_call(menu, allergies, restrictions, goals):
     prompt = 'Here is an unparsed menu:\n' + menu + ". \n"
     if allergies != '':
-        prompt = prompt + "Given these allergies: " + allergies + ".\n"
+        prompt = prompt + "Given these strict allergies: " + allergies + ".\n"
     if restrictions != '':
-        prompt = prompt + "Given these restrictions: " + restrictions + ".\n"
+        prompt = prompt + "Given these strict dietary restrictions: " + restrictions + ".\n"
     if goals != '':
-        prompt = prompt + "Here are their goals: " + goals + ".\n"
-    prompt = prompt + "List the 3 best options from the menu with detailed explanations of macros\n"
+        prompt = prompt + "Given these goals: " + goals + ".\n"
+    prompt = prompt + "Only list the 3 best options from the menu that satisfy these restrictions with explanations of macros using the template below no prose (each reason must be <80 characters)\n"
     prompt = prompt + """
-    ONLY use the following format (JSON):
+    ONLY respond in the following format (JSON):
     {
         "options": [
             {

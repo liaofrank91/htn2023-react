@@ -78,7 +78,7 @@ function FormPage(props) {
 
   const isNextDisabled =
     currentQuestion.options.length === 0 &&
-    props.preferences[currentQuestion.id].trim() === "" && currentQuestion.id != "allergies";
+    props.preferences[currentQuestion.id].trim() === "" && currentQuestion.id != "allergies" && currentQuestion.id != "goals";
 
   // Create an array of steps for the Stepper
   const steps = questions.map((question, index) => (

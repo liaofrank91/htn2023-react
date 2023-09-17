@@ -45,6 +45,7 @@ function CameraApp(props) {
 
   const takePhoto = () => {
     if (videoRef.current && canvasRef.current) {
+      props.setLoading(true);
       const video = videoRef.current;
       const canvas = canvasRef.current;
 
@@ -133,6 +134,7 @@ function CameraApp(props) {
       .then(response => response.json())
       .then(result => {
         if (result.response && result.response.choices && result.response.choices.length > 0) {
+          console.log(result);
           const options = result.response.choices[0].text;
           const final_options = JSON.parse(options).options;
           // console.log(JSON.parse(options).options);
@@ -144,15 +146,19 @@ function CameraApp(props) {
         }
       })
       .catch(error => console.log('error', error));
+    
   }
 
   return (
     <div className="camera-container">
       <div className="video-frame">
-        <video style={{ height: 'auto', width: "auto", borderRadius: "25px" }} ref={videoRef} autoPlay playsInline muted />
+        {!props.loading && <video style={{ height: 'auto', width: "auto", borderRadius: "25px" }} ref={videoRef} autoPlay playsInline muted />}
         {/* <button onClick={takePhoto} className="take-picture-button">
           Take Photo
         </button> */}
+        {props.loading && (
+        <img style={{borderRadius: "25px"}} src={canvasRef.current.toDataURL('image/png')} alt="Frozen Frame" />
+      )}
         <IconButton onClick={takePhoto} className="take-picture-button" style={{
           position: 'absolute',
           bottom: '10px',

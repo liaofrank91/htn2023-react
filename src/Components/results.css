@@ -1,0 +1,35 @@
+.card1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 17vh;
+    width: 70vw;
+    background-color: #d5e7b8;
+    margin: 30px;
+    border-radius: 15px;
+    padding: 15px;
+    color: #553c2c;
+}
+
+.card2 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 17vh;
+    width: 70vw;
+    background-color: #2b4829;
+    margin: 30px;
+    border-radius: 15px;
+    padding: 15px;
+    color: #fafadf;
+}
+
+.cardHeader {
+    font-weight: bold;
+    font-size: 20px;
+    padding-left: 8px;
+}
+.resultsTitle {
+    font-size: 32px;
+    margin-top: 40px;
+}
+
+/* .specialCard .card {
+    background-color: #CAAD7E;
+} */

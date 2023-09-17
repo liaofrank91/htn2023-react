@@ -109,12 +109,7 @@ function CameraApp(props) {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
-      "menu": "SANDWICHES SERVED WITH A HALF NAPOLI SALAD OR FIRE ROASTED TOMATO BISQUE.\nMEATBALL SANDWICH 22\nGrande size 10″ toasted baguette loaded with simmering, juicy meatballs in a family recipe Pomodoro sauce, topped with melted Mozzarella and finished with zesty Italian drizzle.\nWISEGUY 20\nOven toasted baguette with mayo, charcuterie meats (spicy capicola, soppressata and Italian ham), topped with Provolone cheese, crispy romaine, roma tomatoes, red onions, and zesty Italian dressing.\nCHICKEN PESTO SANDWICH 22\nRoasted chicken breast with pesto sauce and topped with Provolone cheese, prosciutto crisps, and bruschetta mix. Served on a garlic-toasted baguette with your choice of soup or Napoli salad.",
-      "allergies": "",
-      "restrictions": "",
-      "goals": ""
-    });
+    var raw = JSON.stringify(wardObject);
 
     var requestOptions = {
       method: 'POST',

@@ -119,8 +119,15 @@ function CameraApp(props) {
     };
 
     fetch("http://127.0.0.1:5000/frontend-endpoint", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
+      .then(response => response.json())
+      .then(result => {
+        if (result.response && result.response.choices && result.response.choices.length > 0) {
+          const options = result.response.choices[0].text;
+          console.log(JSON.parse(options).options);
+        } else {
+          console.log('No options found in the response.');
+        }
+      })
       .catch(error => console.log('error', error));
   }
 

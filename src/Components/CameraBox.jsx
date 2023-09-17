@@ -106,6 +106,27 @@ function CameraApp(props) {
       goals: props.preferences.goals,
     }
     console.log(wardObject);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "menu": "SANDWICHES SERVED WITH A HALF NAPOLI SALAD OR FIRE ROASTED TOMATO BISQUE.\nMEATBALL SANDWICH 22\nGrande size 10″ toasted baguette loaded with simmering, juicy meatballs in a family recipe Pomodoro sauce, topped with melted Mozzarella and finished with zesty Italian drizzle.\nWISEGUY 20\nOven toasted baguette with mayo, charcuterie meats (spicy capicola, soppressata and Italian ham), topped with Provolone cheese, crispy romaine, roma tomatoes, red onions, and zesty Italian dressing.\nCHICKEN PESTO SANDWICH 22\nRoasted chicken breast with pesto sauce and topped with Provolone cheese, prosciutto crisps, and bruschetta mix. Served on a garlic-toasted baguette with your choice of soup or Napoli salad.",
+      "allergies": "",
+      "restrictions": "",
+      "goals": ""
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://127.0.0.1:5000/frontend-endpoint", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   }
 
   return (
@@ -116,11 +137,11 @@ function CameraApp(props) {
           Take Photo
         </button> */}
         <IconButton onClick={takePhoto} className="take-picture-button" style={{
-            position: 'absolute',
-            bottom: '10px',
-            left: '10px',
-            zIndex: 2,
-          }}>
+          position: 'absolute',
+          bottom: '10px',
+          left: '10px',
+          zIndex: 2,
+        }}>
           <CameraIcon /> {/* Use the camera or shutter icon here */}
         </IconButton>
       </div>

@@ -1,14 +1,28 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin # Import Flask-CORS
 import requests
 import os
 
 app = Flask(__name__)
+#CORS(app, origins='*')  # Allow requests from all origins (for development)
+CORS(
+    app,
+    resources = {
+        r"/*": {
+            "origins": [
+                "http://localhost:3000",
+            ]
+        }
+    },
+)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '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')
 OPENAI_ENDPOINT = 'https://api.openai.com/v1/completions'
 
 @app.route('/frontend-endpoint', methods=['POST'])
+@cross_origin()
 def handle_frontend_request():
     try:
         data = request.json

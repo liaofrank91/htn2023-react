@@ -51,3 +51,7 @@
   left: 10px; /* Adjust as needed */
   z-index: 1;
 }
+
+circle {
+  color: #3e673b;
+}

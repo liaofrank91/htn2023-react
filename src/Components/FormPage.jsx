@@ -24,7 +24,7 @@ const questions = [
       "Lactose-Intolerant",
       "None",
     ],
-    stepperLabel: "Dietary Restrictions",
+    stepperLabel: "Restrictions",
     id: "dietary",
   },
   {
@@ -77,12 +77,19 @@ function FormPage(props) {
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
   const isNextDisabled =
-    currentQuestion.options.length === 0 && props.preferences[currentQuestion.id].trim() === "";
+    currentQuestion.options.length === 0 &&
+    props.preferences[currentQuestion.id].trim() === "";
 
   // Create an array of steps for the Stepper
   const steps = questions.map((question, index) => (
     <Step key={index}>
-      <StepLabel>{question.stepperLabel}</StepLabel>
+      <StepLabel
+        sx={{
+          color: "#453124",
+        }}
+      >
+        {question.stepperLabel}
+      </StepLabel>
     </Step>
   ));
 
@@ -97,13 +104,23 @@ function FormPage(props) {
         classNames="fade"
       >
         <div className="question">
-          <Typography variant="h4">{currentQuestion.text}</Typography>
+          <Typography
+            sx={{
+              color: "#453124",
+              fontSize: "30px",
+            }}
+            className="questionHeader"
+          >
+            {currentQuestion.text}
+          </Typography>
           {currentQuestion.options.length > 0 ? (
             <TextField
               select
               fullWidth
               value={props.preferences[currentQuestion.id]}
               onChange={(e) => props.modifyPreferences(e, currentQuestion.id)}
+              variant="standard"
+              sx={{ color: "#2b4829" }}
             >
               <MenuItem value="">Select an option</MenuItem>
               {currentQuestion.options.map((option, index) => (
@@ -118,6 +135,7 @@ function FormPage(props) {
               value={props.preferences[currentQuestion.id]}
               onChange={(e) => props.modifyPreferences(e, currentQuestion.id)}
               placeholder="Type your answer"
+              variant="standard"
             />
           )}
           <Button
@@ -125,6 +143,15 @@ function FormPage(props) {
             color="primary"
             onClick={handleNextQuestion}
             disabled={isNextDisabled}
+            // sx={{
+            //   backgroundColor: "#3e673b",
+            //   marginTop: "30px",
+            // }}
+            style={{
+              backgroundColor: "#3e673b",
+              marginTop: "30px",
+              color: "white",
+            }}
           >
             {isLastQuestion ? "Finish" : "Next"}
           </Button>

@@ -17,7 +17,7 @@
 }
 
 .container {
-  background-color: #333;
+  background-color: #ecebc9;
   padding: 20px;
   height: 100vh; /* Set the height to 100% of viewport height */
   width: 100vw;
@@ -27,5 +27,14 @@
 }
 
 .question {
-  padding: 10px;
+  padding: 20px;
+}
+
+.questionHeader {
+  padding-bottom: 20px;
+  padding-top: 80px;
+}
+
+path {
+  color: #3e673b;
 }

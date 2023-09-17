@@ -37,6 +37,12 @@ function CameraApp(props) {
     startCamera();
   }, [window.screen.height, window.screen.width]);
 
+  useEffect(() => {
+    if (photoData) {
+      sendImageToOCR();
+    }
+  }, [photoData])
+
   const takePhoto = () => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
@@ -57,7 +63,6 @@ function CameraApp(props) {
       setPhotoData(dataUrl);
       console.log(dataUrl);
 
-      sendImageToOCR();
     }
   };
 

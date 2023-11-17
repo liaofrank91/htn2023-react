@@ -53,6 +53,11 @@ Are you tired of struggling to make healthy choices when dining out? Do you wish
 * Google Cloud Vision API
 * OCR
 
+![image](https://github.com/liaofrank91/htn2023-react/assets/61562373/1e025d6c-ab64-4bfe-98fb-3cc0d6fa53d5)
+![image](https://github.com/liaofrank91/htn2023-react/assets/61562373/3076742f-579c-4f18-b171-03ececfea420)
+![image](https://github.com/liaofrank91/htn2023-react/assets/61562373/770fa99a-3259-4f0d-b413-4acd77310b15)
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Inspiration
